@@ -1,0 +1,8 @@
+1. Build Drum Kit
+---
+Components 
+-Drum Pads
+-On/Off btn
+-volume slider
+-kit 1/2 selector
+-App where it's all put together
