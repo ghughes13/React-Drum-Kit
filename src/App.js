@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import Drumpad from './soundCard';
+import OnOff from './onOff';
+import SetList from './setList';
 
 const bankOne = [{
   keyCode: 81,
@@ -97,34 +99,68 @@ id: 'Snare',
 url: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
 }];
 
-document.addEventListener("keypress", function(event) {
-  // if (event.keyCode === 13) {
-      alert('hi.')
-  // }
+let setList = 1;
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentSet : bankOne
+    };
+  }
+
+  changeSetList = () => {
+    console.log('ran');
+    if(setList === 1) {
+      setList = 2; 
+    } else {
+      setList = 1
+    }
+    console.log(setList);
+    if (setList === 1) {
+      this.currentSet = bankOne;
+    } else {
+      this.currentSet = bankTwo;
+    }
+    console.log(this.currentSet);
+  };
+
+  document.addEventListener("keypress", function(event) {
+  currentSet.forEach(function(item) {
+    let letterPressed = String.fromCharCode(event.keyCode);
+    let uppercaseLetter = letterPressed.toUpperCase();
+    let backToKeycode = uppercaseLetter.charCodeAt(0);
+    if(backToKeycode === item.keyCode) {
+      let audioToPlay = new Audio(item.url);
+      audioToPlay.play();
+    }
+  })
 })
 
-function App() {
-  return (
-    <div className="App">
-        <h1>Drum Kit</h1>
-        <div className="drum-pads">
-          <Drumpad props={bankOne[0]}/> 
-          <Drumpad props={bankOne[1]}/> 
-          <Drumpad props={bankOne[2]}/> 
-          <Drumpad props={bankOne[3]}/> 
-          <Drumpad props={bankOne[4]}/> 
-          <Drumpad props={bankOne[5]}/> 
-          <Drumpad props={bankOne[6]}/> 
-          <Drumpad props={bankOne[7]}/> 
-          <Drumpad props={bankOne[8]}/> 
-        </div>
-
-        <div className="settings">
-          {/* <Volume /> */}
-
-        </div>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+          <h1>Drum Kit</h1>
+          <div className="settings">
+            <OnOff />
+            {/* <Volume /> */}
+            {/* <BTNPressed /> */}
+            <SetList passFunction={this.changeSetList}/>
+          </div>
+          <div className="drum-pads">
+            <Drumpad props={currentSet[0]} /> 
+            <Drumpad props={setList===1 ? bankOne[1] : bankTwo[1]}/> 
+            <Drumpad props={setList===1 ? bankOne[2] : bankTwo[2]}/> 
+            <Drumpad props={setList===1 ? bankOne[3] : bankTwo[3]}/> 
+            <Drumpad props={setList===1 ? bankOne[4] : bankTwo[4]}/> 
+            <Drumpad props={setList===1 ? bankOne[5] : bankTwo[5]}/> 
+            <Drumpad props={setList===1 ? bankOne[6] : bankTwo[6]}/> 
+            <Drumpad props={setList===1 ? bankOne[7] : bankTwo[7]}/> 
+            <Drumpad props={setList===1 ? bankOne[8] : bankTwo[8]}/> 
+          </div>
+      </div>
+    );
+  }
 }
 
 export default App;

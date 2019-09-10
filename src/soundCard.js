@@ -10,19 +10,13 @@ class Drumpad extends React.Component {
         url: new Audio(this.props.props.url)
       };
     }
-  
-    playByKeyboard = (event) => {
-        console.log('keypressed');
-        if(event.keyCode === this.state.keyCode) {
-            console.log('match');
-        }
-    }
 
     render() {
       return (
         <button className="square" onClick={ () => this.state.url.play()} onKeyPress={console.log('key pressed')}>
-        {console.log(this.state.url)}
           {this.state.id}
+          <br />
+          <span className="letter">( <em>{this.state.keyTrigger}</em> )</span>
         </button>
       );
     }
@@ -30,3 +24,5 @@ class Drumpad extends React.Component {
 
   export default Drumpad;
 
+
+  
