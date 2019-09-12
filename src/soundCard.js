@@ -7,8 +7,18 @@ class Drumpad extends React.Component {
         id: this.props.props.id,
         keyTrigger: this.props.props.keyTrigger,
         keyCode: this.props.props.keyCode,
-        url: new Audio(this.props.props.url)
+        url: new Audio(this.props.props.url),
+        didItchange : this.props.refreshIt
       };
+    }
+
+    componentWillReceiveProps({props}) {
+      this.setState({
+        id: this.props.props.id,
+        keyTrigger: this.props.props.keyTrigger,
+        keyCode: this.props.props.keyCode,
+        url: new Audio(this.props.props.url),
+      })
     }
 
     render() {
