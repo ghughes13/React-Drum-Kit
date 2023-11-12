@@ -9,8 +9,6 @@ class SetList extends React.Component {
     //   };
     // }
 
-
-
     render() {
       return (
         <button className="change-list" onClick= { () =>  this.props.changeSetList('fiver') }>Change List</button>

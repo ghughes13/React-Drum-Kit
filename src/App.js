@@ -142,7 +142,7 @@ class App extends React.Component {
             <OnOff />
             {/* <Volume /> */}
             {/* <BTNPressed /> */}
-            <SetList /*passFunction={this.changeSetList}*/ changeSetList={this.changeSetList} onClick={() => this.setState({ refreshIt: this.state.count + 1 }) }/>
+            <SetList changeSetList={this.changeSetList} onClick={() => this.setState({ refreshIt: this.state.count + 1 }) }/>
           </div>
           <div className="drum-pads">
             <Drumpad props={currentSet[0]} refreshIt={this.state.refreshIt}/> 
